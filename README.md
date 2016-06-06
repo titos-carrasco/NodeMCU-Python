@@ -4,7 +4,7 @@ NodeMCU y MicroPython
 Mis aproximaciones a NodeMCU (Amica / Lolin ) con MicroPython.
 
 ##Ambiente de desarrollo
-El desarrollo se realiza utilizando Geany en Linux Debian.
+El desarrollo es básicamemnte utilizando `Geany` como editor y `screen`como consola serial, todo en Linux Debian. Los siguientes pasos son los requeridos para tener el firmware corriendo en el NodeMCU:
 
 1. Obtener el SDK para ESP8266 (https://github.com/pfalcon/esp-open-sdk)
 
@@ -21,15 +21,15 @@ El desarrollo se realiza utilizando Geany en Linux Debian.
     esptool.py -p $PORT -b $SPEED verify_flash 0x00000 ./MicroPython/esp8266/build/firmware-combined.bin
     ```
 
-## Interactuar con MicroPython
+## Primeros pasos con MicroPython
 
-1. Acceder a la consola con algún software tipo terminal (putty, etc.). Yo utilizo screen:
+1. Acceder a la consola con algún software tipo terminal (putty, etc; yo utilizo screen):
 
 	![](Images/screen.png "" "width:300px;")
 
 	![](Images/boot.png "" "width:300px;")
 
-2. Ya es posible experimentar con MicroPython desde aquí. Cuando se inicia se intenta ejecutar `boot.py` (actualmente levanta el módulo web de REPL) y luego `main.py` que no existe y es donde deberiamos dejar nuestro código para que se ejecute cada vez:
+2. Desde aquí ya es posible experimentar con MicroPython. Cuando se inicia se intenta ejecutar `boot.py` (que actualmente levanta el módulo web de REPL) y luego `main.py` (que no existe y es en donde deberiamos dejar nuestro código para que se ejecute):
 
 	![](Images/boot_py.png "" "width:300px;")
 
@@ -37,20 +37,19 @@ El desarrollo se realiza utilizando Geany en Linux Debian.
 
 	![](Images/help.png "" "width:300px;")
 
-4. Presionando `CTRL-E`en una línea en blanco entra en modo `PASTE` en donde podemos pegar código copiado desde algún otro lugar (ej. Geany). Finalizamos con `CTRL-D' retornando así al modo REPL
+4. Presionando `CTRL-E`en una línea en blanco se entra a modo `PASTE` en donde podemos pegar código copiado desde algún otro lugar (ej. Geany). Finalizamos con `CTRL-D` retornando así al modo REPL
 
 	![](Images/paste.png "" "width:300px;")
 
 5. He tenido problemas pegando código que supera 1Kb. Por ahora es apropiado para enviar código pequeño y poder experimentar
 
-6. Para enviar archivos utilizaba ESPlorer, pero mi editor de preferencia es Geany por lo cual me hice un script en LUA que se encuentra en el directorio `tools\`. Se deberá instalar el plugin de LUA para Geany y copiar el script a `.config/geany/plugins/geanylua`
+6. Para enviar archivos utilizaba ESPlorer, pero me obligaba a cerrar la conexión cada vez que requería utilizar `screen`. Siendo `Geany` mi editor de preferencia, y aprovechando el plugin LUA para Geany, me hice un script que transforma el archivo en edición dejándolo listo para copiar y pegar en la consola de MicroPython (ver el directorio `tools/` e instalarlo en `.config/geany/plugins/geanylua`)
 
 	![](Images/plugin.png "" "width:300px;")
 
 	![](Images/filtered.png "" "width:300px;")
 
-7. Finalmente pegar el código transformado utilizando el modo `PASTE`
-
+7. Lo anterior no está exento de problemas y al pegar el código a veces se pierden caracteres en el modo `REPL` lo que genera errores en el intérprete. En el modo `PASTE` he tenido problemas con código mayor que 1kb.
 
 
 ***

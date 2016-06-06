@@ -34,7 +34,7 @@ function transform( line )
     line = string.gsub( line, "\\", "\\\\" )
     line = string.gsub( line, "'", "\\'" )
     line = string.gsub( line, "^", "f.write('" )
-    line = string.gsub( line, "$", "')\n" )
+    line = string.gsub( line, "$", "\\n')\n" )
     geany.copy( line )
     geany.paste()
 end
